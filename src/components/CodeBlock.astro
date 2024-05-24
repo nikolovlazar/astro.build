@@ -1,5 +1,5 @@
 ---
-import ChevronIcon from "~/icons/ChevronIcon.jsx";
+import ChevronIcon from '~/icons/ChevronIcon.jsx';
 ---
 
 <div data-code-block class='bg-blue-purple-gradient p-0.5 shadow-sm'>
@@ -10,11 +10,16 @@ import ChevronIcon from "~/icons/ChevronIcon.jsx";
       <slot />
     </code>
 
-    <div class='relative'>
+    <div class='relative flex'>
+      <button
+        class='block p-4 transition hover:scale-110 active:scale-100 active:transition-none'
+        data-enable-copy>👍</button
+      >
       <button
         data-copy-button
         class='block p-4 transition hover:scale-110 active:scale-100 active:transition-none'
         title='Copy to clipboard'
+        disabled
       >
         <svg
           class='w-5'
@@ -53,9 +58,18 @@ import ChevronIcon from "~/icons/ChevronIcon.jsx";
       HTMLButtonElement,
       codeBlock
     );
+    const enableCopy = getElement(
+      '[data-enable-copy]',
+      HTMLButtonElement,
+      codeBlock
+    );
     const tooltip = getElement('[data-tooltip]', HTMLElement, codeBlock);
 
     const timer = createTimer(1500);
+
+    enableCopy.addEventListener('click', () => {
+      button.disabled = false;
+    });
 
     button.addEventListener('click', async () => {
       const blob = new Blob([code.innerText], { type: 'text/plain' });
