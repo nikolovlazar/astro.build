@@ -28,6 +28,7 @@
 		"@astrojs/web-vitals": "^0.2.1",
 		"@fontsource-variable/inter": "^5.0.16",
 		"@iconify-json/ri": "^1.1.20",
+		"@sentry/astro": "^8.4.0",
 		"astro": "^4.4.15",
 		"astro-expressive-code": "^0.33.4",
 		"chart.js": "4.4.1",

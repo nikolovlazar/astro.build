@@ -10,6 +10,7 @@ import { defineConfig } from "astro/config";
 import houston from "./houston.theme.json";
 
 /* https://vercel.com/docs/projects/environment-variables/system-environment-variables#system-environment-variables */
+import sentry from "@sentry/astro";
 const VERCEL_PREVIEW_SITE =
 	process.env.VERCEL_ENV !== "production" &&
 	process.env.VERCEL_URL &&
@@ -23,6 +24,13 @@ export default defineConfig({
 			applyBaseStyles: false,
 		}),
 		solid(),
+		sentry({
+			dsn: "https://a4ffeb87abb2a5edbbaa8fc523bc0ab5@o4506044970565632.ingest.us.sentry.io/4507312696918016",
+			sourceMapsUploadOptions: {
+				project: "astro-build",
+				authToken: process.env.SENTRY_AUTH_TOKEN,
+			},
+		}),
 		astroExpressiveCode({
 			themes: [houston],
 			frames: false,
