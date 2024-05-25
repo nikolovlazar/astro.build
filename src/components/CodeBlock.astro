@@ -1,5 +1,5 @@
 ---
-import ChevronIcon from "~/icons/ChevronIcon.jsx";
+import ChevronIcon from '~/icons/ChevronIcon.jsx';
 ---
 
 <div data-code-block class='bg-blue-purple-gradient p-0.5 shadow-sm'>
@@ -70,12 +70,16 @@ import ChevronIcon from "~/icons/ChevronIcon.jsx";
 
     enableCopy.addEventListener('click', () => {
       button.disabled = false;
-      Sentry.metrics.increment('enable_copy_click', 1);
+      Sentry.metrics.increment('enable_copy_click', 1, {
+        tags: { path: window.location.pathname },
+      });
     });
 
     button.addEventListener('click', async () => {
       const blob = new Blob([code.innerText], { type: 'text/plain' });
-      Sentry.metrics.increment('copy_code_click', 1);
+      Sentry.metrics.increment('copy_code_click', 1, {
+        tags: { path: window.location.pathname },
+      });
 
       await navigator.clipboard.writeText(await blob.text());
       await navigator.clipboard.readText(); // will throw an error if permissions are denied
